@@ -1,0 +1,91 @@
+{{ define "title" }}{{ end}}
+{{ define "header_css" }}{{ end }}
+{{ define "body_classes" }}page-home{{ end }}
+{{ define "header_classes" }}header-transparent{{ end }}
+
+{{ define "meta_tags" }}
+<meta name="description" content="{{ .Site.Params.homepage_meta_tags.meta_description }}" />
+<meta property="og:title" content="{{ .Site.Params.homepage_meta_tags.meta_og_title }}" />
+<meta property="og:type" content="{{ .Site.Params.homepage_meta_tags.meta_og_type }}" />
+<meta property="og:url" content="{{ .Site.Params.homepage_meta_tags.meta_og_url }}" />
+<meta property="og:image" content="{{ .Site.Params.homepage_meta_tags.meta_og_image }}" />
+<meta property="og:description" content="{{ .Site.Params.homepage_meta_tags.meta_og_description }}" />
+<meta name="twitter:card" content="{{ .Site.Params.homepage_meta_tags.meta_twitter_card }}" />
+<meta name="twitter:site" content="{{ .Site.Params.homepage_meta_tags.meta_twitter_site }}" />
+<meta name="twitter:creator" content="{{ .Site.Params.homepage_meta_tags.meta_twitter_creator }}" />
+{{ end }}
+
+{{ define "main" }}
+
+<!-- Hero Image Partial-->
+{{ partial "hero-image-index.html" (dict "background" .Params.heroBackground "fullscreen" .Params.heroFullscreen "height" .Params.heroHeight "heading" .Params.heroHeading "subheading" .Params.heroSubheading "overlay" .Params.heroBackgroundOverlay "diagonal" .Params.heroDiagonal "diagonalfill" .Params.heroDiagonalFill) }}
+
+
+<!-- Spash features (Content: data/splash.json ) -->
+{{ range .Site.Data.splash }}
+  <div class="strip strip-{{ .colour }} pt-8 pb-8 splash">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-6 ">
+          {{if not (modBool .title 2)}} <img class="img-fluid" src="{{ .image }}" />
+          {{ else }} <h2 class="right-align">{{ .heading }}</h2>
+                     <p class="xlarge right-align" style="color:#28AE61">{{ .subheading }}</p>
+                     <p class="large right-align">{{ .paragraph }}</p>
+          {{ end }}
+        </div>
+        <div class="col-12  col-md-6">
+          {{if (modBool .title 2)}} <img class="img-fluid" src="{{ .image }}" />
+          {{ else }} <h2>{{ .heading }}</h2> 
+                     <p class="xlarge" style="color:#28AE61">{{ .subheading }}</p>
+                     <p class="large">{{ .paragraph }}</p>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <svg class="hero-diagonal" aria-hidden="true" role="presentation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 10" preserveAspectRatio="none">
+    <polygon fill="#F0F0F0" points="{{ .points }}"/>
+  </svg>
+  </div>
+{{ end }}
+
+<!-- Getting started partial (Content: config.toml, Template: layouts/patials/install.html) -->
+{{ partial "install.html" . }}
+
+<!-- Partners (Content: data/partners.json ) -->
+{{ if and (gt (len .Site.Data.partners) 0) (.Site.Params.homepage.show_partners) }}
+<div class="strip strip-white home-partners">
+  <div class="container pt-5 pt-md-10 pb-10">
+    <div class="row">
+      <div class="col-12">
+        {{ if .Site.Params.homepage.partners_heading }}<h1 class="text-center mb-3">{{ .Site.Params.homepage.partners_heading }}</h1>{{ end }}
+        </br> </br>
+        <div class="partners">
+          {{ range .Site.Data.partners }}
+          {{ if .image }}<div class="partner"><img alt="{{ .title }} logo" src="{{ .image }}" /></div> {{ end }}
+          {{end}}
+        </div>
+        <h2 class="text-center mb-3"></br>{{.Site.Params.homepage.partners_subheading}}</h2>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
+
+<div class="strip strip-secondary">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+    <path fill="#FFFFFF" d="M738,99l262-93V0H0v5.6L738,99z"></path>
+  </svg>
+</div>
+{{ end }}
+
+{{ define "footer_js" }}
+{{ $slick := resources.Get "js/libs/slick.min.js" }}
+{{ $home := resources.Get "js/pages/home.js" }}
+{{ $homeJS := slice $slick $home | resources.Concat "js/homeBundle.js" }}
+{{ if .Site.IsServer }}
+<script type="text/javascript" src="{{ ($homeJS | fingerprint).RelPermalink }}"></script>
+{{ else }}
+<script type="text/javascript" src="{{ ($homeJS | minify | fingerprint).RelPermalink }}"></script>
+{{ end }}
+{{ end }}

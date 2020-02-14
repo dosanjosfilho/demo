@@ -1,0 +1,59 @@
+// Inline code
+code {
+  @include font-size($code-font-size);
+  color: $code-color;
+  word-break: break-word;
+
+  // Streamline the style when inside anchors to avoid broken underline and more
+  a > & {
+    color: inherit;
+  }
+}
+
+// User input typically entered via keyboard
+kbd {
+  padding: $kbd-padding-y $kbd-padding-x;
+  @include font-size($kbd-font-size);
+  color: $kbd-color;
+  background-color: $kbd-bg;
+  @include border-radius($border-radius-sm);
+  @include box-shadow($kbd-box-shadow);
+
+  kbd {
+    padding: 0;
+    @include font-size(100%);
+    font-weight: $nested-kbd-font-weight;
+    @include box-shadow(none);
+
+  }
+}
+
+// Blocks of code
+pre {
+
+  @include font-size($code-font-size);
+  color: $pre-color;
+  display: block;
+  margin: 0px 0px 0px 0px;
+  padding: 2px 2px 2px;
+  border-radius: 4px;
+  font-family: 'Courier', monospace;
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 1.4em;
+
+  // Account for some code outputs that place code tags in pre tags
+  code {
+    @include font-size(inherit);
+    color: inherit;
+    word-break: normal;
+    display: block;
+    padding: 5px 10px 10px;
+  }
+}
+
+// Enable scrollable blocks of code
+.pre-scrollable {
+  max-height: $pre-scrollable-max-height;
+  overflow-y: scroll;
+}

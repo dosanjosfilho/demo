@@ -1,0 +1,68 @@
+.page-work-single {
+  h1.title {
+    font-size: 3rem;
+    font-family: $font-family-heading;
+    color: $primary;
+  }
+  .work-client {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    color: rgb(66, 64, 64);
+    span {
+      color: $primary;
+    }
+  }
+  .work-date {
+    text-transform: uppercase;
+    font-size: 1rem;
+    color: rgb(66, 64, 64);
+  }
+  .work-skills {
+    margin-top: 20px;
+    ul {
+      li {
+        font-size: 15px;
+        color: rgb(107, 107, 107);
+        text-transform: uppercase;
+        display: block;
+      }
+    }
+  }
+  .content {
+    > p {
+      &:first-of-type {
+        font-size: 24px;
+        line-height: 32px;
+        margin-bottom: 40px;
+        font-weight: 300;
+      }
+    }
+  }
+  .work-gallery {
+    /* Masonry container */
+    column-count: 1;
+    column-width: 33%;
+    column-fill: auto;
+    @include media-breakpoint-up(sm) {
+      column-count: 2;
+      column-gap: 15px;
+    }
+    @include media-breakpoint-up(md) {
+      column-count: 3;
+    }
+    @include media-breakpoint-up(lg) {
+      column-count: 3;
+    }
+    .work-gallery-item {
+      /* Masonry bricks or child elements */
+      background-color: #eee;
+      margin: 0;
+      margin: 0 0 20px 0;
+      @include media-breakpoint-up(sm) {
+      }
+      img {
+        @include img-fluid();
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Wellcome Sanger Institute",
+    "image": "/logos/sanger.svg"
+  },
+  {
+    "title": "Boehringer Ingelheim",
+    "image": "/logos/boehringer.png"
+  },
+  {
+    "title": "EMBL-EBI",
+    "image": "/logos/embl-ebi.svg"
+  },
+  {
+    "title": "Roche",
+    "image": "/logos/roche.svg"
+  },
+  {
+    "title": "WHO",
+    "image": "/logos/who.svg"
+  }
+]
