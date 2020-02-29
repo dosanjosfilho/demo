@@ -1,6 +1,16 @@
 ---
 label: test
 hide_body: true
-fields: []
+fields:
+- name: t
+  type: textarea
+  default: ''
+  config:
+    required: false
+    wysiwyg: false
+    schema:
+      format: markdown
+  label: t
+  description: t2
 pages:
 - content/test1.md
