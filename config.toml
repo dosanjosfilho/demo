@@ -1,4 +1,4 @@
-baseURL = "http://demo.test.orcgg.cn/"
+baseURL = "https://descritiva2.netlify.app/"
 languageCode = "en-us"
 title = "Demo"
 theme = "hugo-advance"
